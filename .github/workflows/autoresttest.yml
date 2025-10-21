@@ -20,10 +20,10 @@ jobs:
             exit 1
           fi
           SPEC_CONTENT=$(cat market.json | jq -c . | sed "s/'/''/g")
-          curl -X POST https://autoresttest.com/api/v1/jobs \
+          curl -X POST https://unprofanely-nonnocturnal-latonya.ngrok-free.app/api/v1/jobs \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.AUTORESTTEST_API_KEY }}" \
             -d '{
               "spec": "$SPEC_CONTENT",
-              "config": {}
+              "config": {"llm_engine":"gpt-4","llm_engine_temperature":0.7,"use_cached_graph":false,"use_cached_q_tables":false,"rl_agent_learning_rate":0.1,"rl_agent_discount_factor":0.9,"rl_agent_max_exploration":1,"time_duration_seconds":60,"mutation_rate":0.1}
             }'
