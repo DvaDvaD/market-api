@@ -16,6 +16,7 @@ jobs:
       - name: Run AutoRestTest
         run: |
           set -e
+          set -x
 
           echo "${{ secrets.AUTORESTTEST_API_KEY }}"
           echo "Spec content: $(node -p "JSON.stringify(require('./market.json'))")"
