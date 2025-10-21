@@ -1,0 +1,29 @@
+
+name: AutoRestTest CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-autoresttest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run AutoRestTest
+        run: |
+          if [ ! -f "market.json" ]; then
+            echo "Error: Spec file not found at market.json"
+            exit 1
+          fi
+          SPEC_CONTENT=$(cat market.json | jq -c . | sed "s/'/''/g")
+          curl -X POST https://autoresttest.com/api/v1/jobs \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.AUTORESTTEST_API_KEY }}" \
+            -d '{
+              "spec": "$SPEC_CONTENT",
+              "config": {}
+            }'
