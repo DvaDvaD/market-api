@@ -19,12 +19,14 @@ jobs:
             echo "Error: Spec file not found at market.json"
             exit 1
           fi
-          SPEC_CONTENT=$(cat market.json | jq -c . | sed "s/'/''/g")
+          # Use Node to read and stringify the JSON spec, which is more robust than using shell commands.
+          SPEC_JSON_STRING=$(node -p "JSON.stringify(require('./market.json'))")
+
           curl -X POST https://unprofanely-nonnocturnal-latonya.ngrok-free.app/api/v1/jobs \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.AUTORESTTEST_API_KEY }}" \
             -d '{
-              "spec": "$SPEC_CONTENT",
-              "config": {"llm_engine":"gpt-4","llm_engine_temperature":0.7,"use_cached_graph":false,"use_cached_q_tables":false,"rl_agent_learning_rate":0.1,"rl_agent_discount_factor":0.9,"rl_agent_max_exploration":1,"time_duration_seconds":60,"mutation_rate":0.1}
-              "user_id": user_34JbEVSt2M9RUA7qaBE2SYPQ85z
+              "spec": $SPEC_JSON_STRING,
+              "config": {"llm_engine":"gpt-4","llm_engine_temperature":0.7,"use_cached_graph":false,"use_cached_q_tables":false,"rl_agent_learning_rate":0.1,"rl_agent_discount_factor":0.9,"rl_agent_max_exploration":1,"time_duration_seconds":60,"mutation_rate":0.1},
+              "user_id": "user_34JbEVSt2M9RUA7qaBE2SYPQ85z"
             }'
