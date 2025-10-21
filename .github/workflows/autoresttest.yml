@@ -20,7 +20,7 @@ jobs:
             exit 1
           fi
           # Use Node to read and stringify the JSON spec, which is more robust than using shell commands.
-          SPEC_JSON_STRING=$(node -p "JSON.stringify(require('./market.json'))")
+          export SPEC_JSON_STRING=$(node -p "JSON.stringify(require('./market.json'))")
 
           curl -X POST https://unprofanely-nonnocturnal-latonya.ngrok-free.app/api/v1/jobs \
             -H "Content-Type: application/json" \
