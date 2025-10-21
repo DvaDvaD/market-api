@@ -17,6 +17,9 @@ jobs:
         run: |
           set -e
 
+          echo "${{ secrets.AUTORESTTEST_API_KEY }}"
+          echo "Spec content: $(node -p "JSON.stringify(require('./market.json'))")"
+
           if [ ! -f "market.json" ]; then
             echo "Error: Spec file not found at market.json"
             exit 1
