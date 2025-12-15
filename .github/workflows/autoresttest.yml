@@ -29,7 +29,7 @@ jobs:
             const spec = require('./market.json');
             const data = {
               spec: JSON.stringify(spec),
-              config: {\"llm_engine\":\"gpt-4\",\"llm_engine_temperature\":0.7,\"use_cached_graph\":true,\"use_cached_q_tables\":true,\"rl_agent_learning_rate\":0.1,\"rl_agent_discount_factor\":0.9,\"rl_agent_max_exploration\":1,\"time_duration_seconds\":60,\"mutation_rate\":0.1,\"repository\":\"DvaDvaD/market-api\",\"specPath\":\"market.json\",\"apiKeyName\":\"AUTORESTTEST_API_KEY\"},
+              config: {\"api_url_override\":\"https://api.dvad.my.id\",\"llm_engine\":\"gpt-4\",\"llm_engine_temperature\":0.7,\"use_cached_graph\":true,\"use_cached_q_tables\":true,\"rl_agent_learning_rate\":0.1,\"rl_agent_discount_factor\":0.9,\"rl_agent_max_exploration\":1,\"time_duration_seconds\":60,\"mutation_rate\":0.1,\"repository\":\"DvaDvaD/market-api\",\"specPath\":\"market.json\",\"apiKeyName\":\"AUTORESTTEST_API_KEY\"},
               user_id: 'user_34JbEVSt2M9RUA7qaBE2SYPQ85z'
             };
             console.log(JSON.stringify(data));
